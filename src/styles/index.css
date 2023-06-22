@@ -1,0 +1,535 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto";
+  color: #1C1E21;
+}
+
+html {
+  font-size: 20px;
+}
+
+body {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #FAFCFF;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header img {
+  max-width: 200px;
+}
+header form {
+  flex-grow: 1;
+  text-align: center;
+  height: 60px;
+}
+header form input {
+  width: 90%;
+  outline: none;
+  border: 2px solid #1877F2;
+  border-radius: 30px;
+  height: 100%;
+  background-color: #f3f3f3;
+  font-size: 1rem;
+  padding-left: 30px;
+}
+header form input::-moz-placeholder {
+  color: #ADADAD;
+}
+header form input::placeholder {
+  color: #ADADAD;
+}
+header .navigation {
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+  height: 100%;
+  margin: 10px 0;
+}
+header .navigation .link {
+  text-decoration: none;
+}
+header .navigation .activeLink div p {
+  color: #1877F2;
+}
+header .navigation .itemOFNavigation {
+  flex-grow: 1;
+  height: 100%;
+  color: #ADADAD;
+  text-align: center;
+  font-size: 0.7em;
+}
+header .navigation .itemOFNavigation p {
+  color: #ADADAD;
+}
+header .navigation .itemOFNavigation img {
+  max-width: 32px;
+}
+header .navigation .itemOFNavigation:hover {
+  opacity: 80%;
+}
+
+.audiencesPage {
+  width: 100%;
+  display: flex;
+}
+
+.filters {
+  align-self: flex-start;
+  width: 25%;
+  box-shadow: 0 1px 4px #e3ebfc, 0 24px 48px rgba(230, 235, 245, 0.4);
+  padding: 30px;
+  border-radius: 5px;
+  background-color: white;
+}
+.filters button {
+  background: #1877F2;
+  border-radius: 20px;
+  color: white;
+  border: 2px white solid;
+  outline: none;
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+.filters button:hover {
+  border-color: #1877F2;
+  background-color: white;
+  color: #1877F2;
+}
+.filters .filter {
+  margin-bottom: 15px;
+}
+.filters .more {
+  color: #1877F2;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.custom-checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.custom-checkbox + label {
+  display: inline-flex;
+  align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.custom-checkbox + label::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 2px solid white;
+  border-radius: 0.25em;
+  margin-right: 0.5em;
+  background-color: #D9D9D9;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+.custom-checkbox:not(:disabled):not(:checked) + label:hover::before {
+  border-color: #b3d7ff;
+}
+.custom-checkbox:not(:disabled):active + label::before {
+  background-color: #b3d7ff;
+  border-color: #b3d7ff;
+}
+.custom-checkbox:focus + label::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+.custom-checkbox:focus:not(:checked) + label::before {
+  border-color: #80bdff;
+}
+.custom-checkbox:checked + label::before {
+  border-color: #0b76ef;
+  background-color: #0b76ef;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+.custom-checkbox:disabled + label::before {
+  background-color: #e9ecef;
+}
+
+.audiences {
+  flex-grow: 1;
+  margin-left: 2%;
+}
+.audiences .imgContainer {
+  margin-right: 15px;
+}
+.audiences .imgContainer img {
+  max-width: 310px;
+  border-radius: 2px;
+}
+.audiences .audience {
+  display: flex;
+  padding: 15px;
+  box-shadow: 0 1px 4px #e3ebfc, 0 24px 48px rgba(230, 235, 245, 0.4);
+  margin-bottom: 2%;
+  border-radius: 5px;
+  transition: box-shadow 0.2s ease-in;
+  background-color: white;
+  cursor: pointer;
+}
+.audiences .audience:hover {
+  box-shadow: 0 1px 4px #1877F2, 0 24px 48px rgba(230, 235, 245, 0.4);
+}
+
+.modalAudienceBackground {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+.modalAudienceBackground .modalAudience {
+  width: 50%;
+  max-height: 800px;
+  margin: 5% auto;
+  background: white;
+  border-radius: 20px;
+  padding: 50px;
+  overflow: auto;
+}
+.modalAudienceBackground .modalAudience .shortDescription {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.modalAudienceBackground .modalAudience img {
+  max-width: 320px;
+  border-radius: 10px;
+}
+.modalAudienceBackground .modalAudience .itemOfDescriptionAudience {
+  min-height: 50px;
+  width: 100%;
+  background: #f3f3f3;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  padding: 10px 20px;
+}
+
+.filtersSchedules {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.filtersSchedules button, .filtersSchedules input {
+  border: 2px solid #F3F3F3;
+  background-color: white;
+  font-size: 1rem;
+  height: 50px;
+  padding: 0 20px;
+  cursor: pointer;
+}
+.filtersSchedules button:hover, .filtersSchedules input:hover {
+  color: #1877F2;
+}
+.filtersSchedules .typesOfSchedules * {
+  margin-left: -2px;
+}
+.filtersSchedules input {
+  outline: none;
+  color: #ADADAD;
+  cursor: text;
+}
+.filtersSchedules .search {
+  flex-grow: 1;
+  margin: 0 30px;
+  color: #1C1E21;
+}
+.filtersSchedules .date {
+  margin-right: 30px;
+  color: #1C1E21;
+}
+.filtersSchedules .arrow:hover {
+  color: #1877F2;
+}
+
+.dateOfSchedule {
+  display: flex;
+}
+.dateOfSchedule .date {
+  background: #1877F2;
+  width: 100px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 5px 0;
+  align-self: flex-start;
+}
+.dateOfSchedule .date p {
+  color: white;
+  font-weight: bold;
+}
+.dateOfSchedule .date .number {
+  background: white;
+  color: #1C1E21;
+  width: 80%;
+  margin: 0 auto;
+}
+.dateOfSchedule .classes {
+  width: 68%;
+  margin-left: 2%;
+}
+.dateOfSchedule .classes .class {
+  display: flex;
+  width: 100%;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 4px #e3ebfc, 0 24px 48px rgba(230, 235, 245, 0.4);
+  border-radius: 5px;
+  padding: 15px 0;
+  background: white;
+}
+.dateOfSchedule .classes .class * {
+  font-size: 0.8rem;
+}
+.dateOfSchedule .classes .class .classMainInfo {
+  flex-grow: 1;
+}
+.dateOfSchedule .classes .class .classTime {
+  margin: 0 30px;
+  font-weight: bold;
+}
+.dateOfSchedule .classes .class .classAudience {
+  margin: 10px 30px;
+  color: #1877F2;
+  text-decoration: underline;
+}
+
+.contracts {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.contracts button {
+  background-color: #1877F2;
+  border: 2px white solid;
+  outline: none;
+  border-radius: 20px;
+  width: 200px;
+  height: 50px;
+  margin-bottom: 20px;
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.contracts button:hover {
+  color: #1877F2;
+  border-color: #1877F2;
+  background: white;
+}
+.contracts .contract {
+  border: none;
+  border-radius: 20px;
+  height: 80px;
+  margin: 0;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 1px 4px #e3ebfc, 0 24px 48px rgba(230, 235, 245, 0.4);
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.contracts .contract:hover {
+  box-shadow: 0 1px 4px #1877F2, 0 24px 48px rgba(230, 235, 245, 0.4);
+}
+.contracts .contract .date {
+  font-size: 0.7rem;
+}
+.contracts .contract .title {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.contractForm {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 0 auto;
+  height: 500px;
+  text-align: center;
+}
+.contractForm h1 {
+  margin-bottom: 30px;
+}
+.contractForm input, .contractForm textarea {
+  margin-bottom: 1%;
+  min-height: 40px;
+  font-size: 0.7rem;
+}
+.contractForm textarea {
+  padding-top: 10px;
+  resize: none;
+}
+.contractForm .textInput {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 1px 4px #e3ebfc, 0 24px 48px rgba(230, 235, 245, 0.4);
+  padding-left: 20px;
+  outline: none;
+}
+.contractForm .textInput:focus {
+  border: 2px solid #1877F2;
+}
+.contractForm .mainTextContract {
+  flex-grow: 1;
+  vertical-align: top;
+}
+.contractForm button {
+  width: 150px;
+  font-size: 0.7rem;
+  color: white;
+  border: 2px #FAFCFF solid;
+  border-radius: 20px;
+  background-color: #1877F2;
+  align-self: center;
+  height: 40px;
+  cursor: pointer;
+}
+.contractForm button:hover {
+  color: #1877F2;
+  border-color: #1877F2;
+  background-color: white;
+}
+.contractForm .backToContracts {
+  color: #1877F2;
+  cursor: pointer;
+  font-size: 0.7rem;
+  text-decoration: underline;
+}
+.contractForm .backToContracts:hover {
+  color: #1C1E21;
+  text-decoration: none;
+  align-self: center;
+}
+
+.support {
+  width: 60%;
+  margin: 0 auto;
+  box-shadow: 0 1px 4px #e3ebfc, 0 24px 48px rgba(230, 235, 245, 0.4);
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+}
+.support .headerChat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #ADADAD;
+}
+.support .headerChat .iconAndTitle {
+  display: flex;
+  align-items: center;
+}
+.support .headerChat .iconAndTitle * {
+  padding-right: 10px;
+}
+.support .headerChat .iconAndTitle p {
+  color: #1C1E21;
+}
+.support .headerChat > img {
+  cursor: pointer;
+}
+.support .headerChat > img:hover {
+  opacity: 80%;
+}
+.support .messages {
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+.support .messages .messageFromMe {
+  background: #1877F2;
+  border-radius: 10px;
+  align-self: end;
+  color: white;
+  padding: 10px;
+  font-size: 0.8rem;
+  max-width: 60%;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+.support .messages .messageFromMe p {
+  color: white;
+}
+.support form {
+  width: 100%;
+  display: flex;
+  border-top: 1px solid #ADADAD;
+  padding: 20px;
+  justify-content: space-between;
+}
+.support form > * {
+  margin: 0 10px;
+}
+.support form input[type=text] {
+  outline: none;
+  width: 100%;
+  border-radius: 5px;
+  height: 35px;
+  padding-left: 10px;
+  border: 1px solid #ADADAD;
+  font-size: 0.75rem;
+}
+.support form input[type=file] {
+  display: none;
+}
+.support form label {
+  cursor: pointer;
+  margin-top: 5px;
+}
+.support form label img {
+  max-height: 24px;
+}
+.support form label:hover {
+  opacity: 80%;
+}
+.support form .sendMessageBtn {
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-top: 5px;
+}
+.support form .sendMessageBtn:hover {
+  opacity: 80%;
+}
+.support form .sendMessageBtn img {
+  max-height: 24px;
+}
+.support .messageAndSelectedFiles {
+  flex-grow: 1;
+}
+.support .selectedFiles {
+  margin-top: 10px;
+  font-size: 0.7rem;
+  width: 100%;
+  font-weight: bold;
+}
+.support .selectedFiles p {
+  color: #1877F2;
+  display: flex;
+  align-items: center;
+}/*# sourceMappingURL=index.css.map */
